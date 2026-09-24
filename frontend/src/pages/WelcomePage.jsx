@@ -5,7 +5,6 @@ import { useAuth } from '../services/AuthContext';
 const WelcomePage = () => {
   const { user } = useAuth();
 
-  // Format member since date nicely, e.g. "September 2026"
   const memberSinceFormatted = user?.createdAt
     ? new Date(user.createdAt).toLocaleDateString('en-US', {
         month: 'long',
@@ -20,9 +19,9 @@ const WelcomePage = () => {
       <div className="welcome-container">
         {/* Header Section */}
         <div className="welcome-header">
-          <div className="welcome-badge">🚀 Welcome Onboard</div>
+          <div className="welcome-badge">Welcome Onboard</div>
           <h1 className="welcome-title">
-            Welcome to GameHub, <span className="text-gradient">{user?.name || 'Gamer'}</span> 🎮
+            Welcome to GameHub, <span className="text-gradient">{user?.name || 'Gamer'}</span>
           </h1>
           <p className="welcome-tagline">"Your gaming journey starts here."</p>
           <p className="welcome-subdesc">
@@ -30,10 +29,15 @@ const WelcomePage = () => {
           </p>
         </div>
 
-        {/* Three Feature Cards */}
+        {/* Three Feature Cards with Sleek SVGs */}
         <div className="welcome-cards-grid">
           <div className="welcome-feature-card">
-            <div className="welcome-card-icon">🔍</div>
+            <div className="welcome-card-svg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </div>
             <h3 className="welcome-card-title">Discover</h3>
             <p className="welcome-card-desc">
               Explore games and find something new to play.
@@ -41,7 +45,12 @@ const WelcomePage = () => {
           </div>
 
           <div className="welcome-feature-card">
-            <div className="welcome-card-icon">📚</div>
+            <div className="welcome-card-svg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+              </svg>
+            </div>
             <h3 className="welcome-card-title">Build Your Library</h3>
             <p className="welcome-card-desc">
               Save your favorite games in one place.
@@ -49,7 +58,11 @@ const WelcomePage = () => {
           </div>
 
           <div className="welcome-feature-card pro-highlight">
-            <div className="welcome-card-icon">⭐</div>
+            <div className="welcome-card-svg pro-svg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
             <h3 className="welcome-card-title">Go Pro</h3>
             <p className="welcome-card-desc">
               Unlock unlimited access and exclusive features.
@@ -78,10 +91,10 @@ const WelcomePage = () => {
         {/* Action Buttons */}
         <div className="welcome-actions">
           <Link to="/games" className="btn-primary-lg">
-            Explore Games →
+            Explore Games
           </Link>
           <Link to="/dashboard" className="btn-secondary-lg">
-            Go to Dashboard →
+            Go to Dashboard
           </Link>
         </div>
       </div>

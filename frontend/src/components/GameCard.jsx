@@ -23,7 +23,7 @@ const GameCard = ({ game, isInLibrary, onLibraryUpdated }) => {
 
     try {
       const res = await gamesAPI.addToLibrary(game._id);
-      setSuccessMsg('Added to library!');
+      setSuccessMsg('Added to library');
       await refreshUser();
       if (onLibraryUpdated) {
         onLibraryUpdated(game._id);
@@ -48,12 +48,16 @@ const GameCard = ({ game, isInLibrary, onLibraryUpdated }) => {
           className="game-card-img"
           loading="lazy"
           onError={(e) => {
-            // Fallback image in case network or unsplash url fails
             e.target.src = 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80';
           }}
         />
         <div className="game-card-genre-badge">{game.genre}</div>
-        <div className="game-card-rating">★ {game.rating?.toFixed(1) || '4.5'}</div>
+        <div className="game-card-rating">
+          <svg className="star-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+          <span>{game.rating?.toFixed(1) || '4.5'}</span>
+        </div>
       </div>
 
       <div className="game-card-body">
@@ -73,7 +77,7 @@ const GameCard = ({ game, isInLibrary, onLibraryUpdated }) => {
 
             {isInLibrary ? (
               <span className="badge-owned">
-                ✓ In Library
+                In Library
               </span>
             ) : (
               <button
@@ -81,7 +85,7 @@ const GameCard = ({ game, isInLibrary, onLibraryUpdated }) => {
                 disabled={loading}
                 className="btn-primary-sm"
               >
-                {loading ? 'Adding...' : '+ Library'}
+                {loading ? 'Adding...' : 'Add'}
               </button>
             )}
           </div>
@@ -91,7 +95,7 @@ const GameCard = ({ game, isInLibrary, onLibraryUpdated }) => {
           <div className="card-alert-error">
             <span>{errorMsg}</span>
             {errorMsg.includes('Upgrade') && (
-              <Link to="/pricing" className="alert-link">Upgrade →</Link>
+              <Link to="/pricing" className="alert-link">Upgrade Plan</Link>
             )}
           </div>
         )}

@@ -14,7 +14,6 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // If user was redirected from a protected route, remember where they were going
   const from = location.state?.from?.pathname || '/dashboard';
 
   const handleChange = (e) => {
@@ -37,7 +36,6 @@ const LoginPage = () => {
 
     try {
       await login(formData.email.trim(), formData.password);
-      // Existing user login navigates directly to dashboard
       navigate(from, { replace: true });
     } catch (err) {
       setError(
@@ -52,7 +50,12 @@ const LoginPage = () => {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-header">
-          <div className="auth-icon">🎮</div>
+          <div className="auth-icon-wrapper">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </div>
           <h1 className="auth-title">Welcome Back</h1>
           <p className="auth-subtitle">Sign in to access your game library and dashboard.</p>
         </div>
@@ -93,7 +96,7 @@ const LoginPage = () => {
             disabled={loading}
             className="btn-primary-block"
           >
-            {loading ? 'Signing In...' : 'Sign In to GameHub'}
+            {loading ? 'Signing In...' : 'Sign In'}
           </button>
         </form>
 

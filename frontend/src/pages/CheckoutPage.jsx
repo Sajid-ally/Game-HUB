@@ -37,11 +37,9 @@ const CheckoutPage = () => {
       });
 
       if (res.data?.success) {
-        // Update user state locally
         updateUserPlan('pro');
         await refreshUser();
 
-        // Redirect to dashboard with success flash notification
         navigate('/dashboard', {
           state: {
             paymentSuccess: 'Congratulations! You are now a GameHub Pro member. Unlimited library access is now active.'
@@ -64,7 +62,11 @@ const CheckoutPage = () => {
       <div className="checkout-container">
         {/* Crucial Demo Banner as required */}
         <div className="demo-payment-alert">
-          <span className="demo-alert-icon">🛡️</span>
+          <div className="demo-alert-icon-svg">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
           <div className="demo-alert-text">
             <strong>Demo Checkout — No real payment will be processed.</strong>
             <p>This is a simulated sandbox flow for evaluation purposes. Dummy test values are pre-filled below.</p>
@@ -107,7 +109,7 @@ const CheckoutPage = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="cardNumber">Fake Card Number</label>
+                <label htmlFor="cardNumber">Card Number (Sandbox)</label>
                 <div className="input-with-badge">
                   <input
                     type="text"
@@ -158,11 +160,11 @@ const CheckoutPage = () => {
                 disabled={loading}
                 className="btn-pay-demo"
               >
-                {loading ? 'Processing Demo Payment...' : 'Pay ₹299'}
+                {loading ? 'Processing Demo Payment...' : 'Pay ₹299 (Demo)'}
               </button>
 
               <div className="checkout-disclaimer">
-                By clicking "Pay ₹299", an order record will be simulated in the backend and your account will immediately upgrade to the Pro plan.
+                By clicking "Pay ₹299 (Demo)", an order record will be simulated in the backend and your account will immediately upgrade to the Pro plan.
               </div>
             </form>
           </div>
@@ -202,15 +204,15 @@ const CheckoutPage = () => {
             <div className="summary-features-list">
               <h5>Included with GameHub Pro:</h5>
               <ul>
-                <li>✓ Unlimited personal game library</li>
-                <li>✓ Remove 3-game restriction</li>
-                <li>✓ Distinctive Pro badge on profile & dashboard</li>
-                <li>✓ Instant simulation without real charges</li>
+                <li>Unlimited personal game library</li>
+                <li>Removal of 3-game restriction</li>
+                <li>Distinctive Pro badge on profile & dashboard</li>
+                <li>Instant simulation without real charges</li>
               </ul>
             </div>
 
             <div className="summary-back-link">
-              <Link to="/pricing">← Back to Pricing Plans</Link>
+              <Link to="/pricing">Back to Pricing Plans</Link>
             </div>
           </div>
         </div>

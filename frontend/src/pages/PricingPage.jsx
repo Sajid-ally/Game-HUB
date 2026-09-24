@@ -21,7 +21,7 @@ const PricingPage = () => {
       <div className="pricing-container">
         {/* Header Section */}
         <div className="pricing-header">
-          <span className="section-tag">SAAS MEMBERSHIP TIERS</span>
+          <span className="section-tag">MEMBERSHIP TIERS</span>
           <h1 className="pricing-title">Simple, Transparent Gaming Plans</h1>
           <p className="pricing-subtitle">
             Choose the gaming experience that matches your ambitions. Start completely free or unlock the full power of GameHub Pro.
@@ -47,27 +47,41 @@ const PricingPage = () => {
 
             <div className="pricing-features">
               <div className="feature-row included">
-                <span className="check-icon">✓</span>
+                <svg className="check-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
                 <span>Browse entire fictional catalog</span>
               </div>
               <div className="feature-row included">
-                <span className="check-icon">✓</span>
+                <svg className="check-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
                 <span>Basic personal cloud library</span>
               </div>
               <div className="feature-row included">
-                <span className="check-icon">✓</span>
+                <svg className="check-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
                 <span><strong>3 games maximum</strong> in library</span>
               </div>
               <div className="feature-row included">
-                <span className="check-icon">✓</span>
+                <svg className="check-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
                 <span>Standard dashboard analytics</span>
               </div>
               <div className="feature-row excluded">
-                <span className="cross-icon">✕</span>
+                <svg className="cross-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
                 <span>Unlimited game storage</span>
               </div>
               <div className="feature-row excluded">
-                <span className="cross-icon">✕</span>
+                <svg className="cross-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
                 <span>Exclusive Pro profile badge</span>
               </div>
             </div>
@@ -80,7 +94,7 @@ const PricingPage = () => {
                   </button>
                 ) : (
                   <button className="btn-tier-active" disabled>
-                    ✓ Your Current Plan
+                    Your Current Plan
                   </button>
                 )
               ) : (
@@ -93,7 +107,7 @@ const PricingPage = () => {
 
           {/* PRO PLAN */}
           <div className={`pricing-card featured-pro-card ${isPro ? 'active-tier' : ''}`}>
-            <div className="pro-popular-badge">RECOMMENDED FOR EVALUATION</div>
+            <div className="pro-popular-badge">RECOMMENDED</div>
             {isPro && <div className="tier-current-tag">ACTIVE SUBSCRIBER</div>}
 
             <div className="pricing-card-header">
@@ -108,48 +122,66 @@ const PricingPage = () => {
 
             <div className="pricing-features">
               <div className="feature-row included pro-feature">
-                <span className="check-icon">✓</span>
+                <svg className="check-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
                 <span><strong>Unlimited library</strong> capacity</span>
               </div>
               <div className="feature-row included pro-feature">
-                <span className="check-icon">✓</span>
-                <span>Access to exclusive future releases</span>
+                <svg className="check-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>Access to exclusive releases</span>
               </div>
               <div className="feature-row included pro-feature">
-                <span className="check-icon">✓</span>
+                <svg className="check-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
                 <span>Advanced dashboard & order metrics</span>
               </div>
               <div className="feature-row included pro-feature">
-                <span className="check-icon">✓</span>
-                <span>Distinguished Pro membership badge</span>
+                <svg className="check-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>Distinguished Pro badge</span>
               </div>
               <div className="feature-row included pro-feature">
-                <span className="check-icon">✓</span>
+                <svg className="check-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
                 <span>Priority game launch queue</span>
               </div>
               <div className="feature-row included pro-feature">
-                <span className="check-icon">✓</span>
-                <span>Instant simulation via Demo Checkout</span>
+                <svg className="check-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>Simulated Demo Payment flow</span>
               </div>
             </div>
 
             <div className="pricing-cta-wrap">
               {isPro ? (
                 <button className="btn-tier-active" disabled>
-                  ★ Active Pro Subscriber
+                  Active Pro Subscriber
                 </button>
               ) : (
                 <button onClick={handleProSelect} className="btn-upgrade-pro">
-                  Upgrade to Pro (₹299/mo) →
+                  Upgrade to Pro (₹299/mo)
                 </button>
               )}
             </div>
           </div>
         </div>
 
-        {/* Demo Payment Notice Banner */}
+        {/* Demo Payment Notice Banner with SVG icon */}
         <div className="pricing-notice-box">
-          <div className="notice-icon">ℹ️</div>
+          <div className="notice-icon-svg">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+          </div>
           <div>
             <h4>Evaluation Safe — Demo Payment Architecture</h4>
             <p>

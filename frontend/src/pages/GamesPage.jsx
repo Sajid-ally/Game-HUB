@@ -102,7 +102,22 @@ const GamesPage = () => {
           </div>
         ) : filteredGames.length === 0 ? (
           <div className="empty-state-box">
-            <div className="empty-icon">🔍</div>
+            <div className="empty-icon-wrap">
+              <svg
+                width="36"
+                height="36"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="empty-state-svg"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </div>
             <h3>No games found</h3>
             <p>Try refining your search terms or genre filter.</p>
             <button

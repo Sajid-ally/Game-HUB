@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../services/AuthContext';
-import { useTheme } from '../services/ThemeContext';
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
-  const { theme, toggleTheme, isDark } = useTheme();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -24,7 +22,7 @@ const Navbar = () => {
   return (
     <header className="navbar-header">
       <div className="navbar-container">
-        {/* Brand Logo with Custom Illuminated Icon */}
+        {/* Brand Logo with Crisp SVG Icon */}
         <Link to="/" className="navbar-brand" onClick={closeMenu}>
           <div className="brand-logo-icon">
             <svg
@@ -32,7 +30,7 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="2.2"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
@@ -56,8 +54,7 @@ const Navbar = () => {
               className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
               onClick={closeMenu}
             >
-              <span className="nav-item-icon">🎮</span>
-              <span>Browse Games</span>
+              Browse Games
             </NavLink>
 
             <NavLink
@@ -65,8 +62,7 @@ const Navbar = () => {
               className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
               onClick={closeMenu}
             >
-              <span className="nav-item-icon">⚡</span>
-              <span>Pricing</span>
+              Pricing
             </NavLink>
 
             {isAuthenticated && (
@@ -76,8 +72,7 @@ const Navbar = () => {
                   className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
                   onClick={closeMenu}
                 >
-                  <span className="nav-item-icon">📚</span>
-                  <span>My Library</span>
+                  My Library
                 </NavLink>
 
                 <NavLink
@@ -85,29 +80,14 @@ const Navbar = () => {
                   className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
                   onClick={closeMenu}
                 >
-                  <span className="nav-item-icon">📊</span>
-                  <span>Dashboard</span>
+                  Dashboard
                 </NavLink>
               </>
             )}
           </div>
 
-          {/* User Auth Actions & Theme Switcher */}
+          {/* User Auth Actions */}
           <div className="nav-auth-actions">
-            {/* Theme Toggle Button (Light/Bright Mode by default) */}
-            <button
-              onClick={toggleTheme}
-              className="theme-toggle-btn"
-              title={isDark ? 'Switch to Bright Mode' : 'Switch to Dark Mode'}
-              aria-label="Toggle Bright/Dark Mode"
-            >
-              {isDark ? (
-                <span className="theme-toggle-content">☀️ Light</span>
-              ) : (
-                <span className="theme-toggle-content">🌙 Dark</span>
-              )}
-            </button>
-
             {isAuthenticated ? (
               <div className="nav-profile-group">
                 <Link to="/profile" className="nav-user-chip" onClick={closeMenu}>
@@ -117,14 +97,14 @@ const Navbar = () => {
                   <div className="user-chip-meta">
                     <span className="user-chip-name">{user?.name}</span>
                     <span className={`plan-pill-mini ${isPro ? 'pill-pro' : 'pill-free'}`}>
-                      {isPro ? '★ PRO' : 'FREE TIER'}
+                      {isPro ? 'PRO' : 'FREE'}
                     </span>
                   </div>
                 </Link>
 
                 {!isPro && (
                   <Link to="/checkout" className="btn-nav-upgrade" onClick={closeMenu}>
-                    Go Pro (₹299)
+                    Upgrade to Pro
                   </Link>
                 )}
 
@@ -138,7 +118,7 @@ const Navbar = () => {
                   Sign In
                 </Link>
                 <Link to="/register" className="btn-nav-join" onClick={closeMenu}>
-                  Get Started Free
+                  Get Started
                 </Link>
               </div>
             )}

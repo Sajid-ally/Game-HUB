@@ -24,7 +24,6 @@ const GameDetailsPage = () => {
         const res = await gamesAPI.getById(id);
         setGame(res.data);
 
-        // Check if game is in user library
         if (isAuthenticated) {
           const libRes = await userAPI.getLibrary();
           const owned = (libRes.data || []).some((g) => g._id === id);
@@ -53,7 +52,7 @@ const GameDetailsPage = () => {
     try {
       await gamesAPI.addToLibrary(id);
       setIsInLibrary(true);
-      setActionSuccess(`"${game.title}" was successfully added to your GameHub library!`);
+      setActionSuccess(`"${game.title}" was successfully added to your GameHub library.`);
       await refreshUser();
     } catch (err) {
       if (err.response?.data?.limitReached) {
@@ -79,11 +78,17 @@ const GameDetailsPage = () => {
     return (
       <div className="game-details-error">
         <div className="empty-state-box">
-          <div className="empty-icon">⚠️</div>
+          <div className="empty-svg-wrap">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          </div>
           <h2>Game Not Found</h2>
           <p>{error || 'The requested game could not be retrieved from the catalog.'}</p>
           <Link to="/games" className="btn-primary-md">
-            ← Back to Games Catalog
+            Back to Games Catalog
           </Link>
         </div>
       </div>
@@ -95,7 +100,7 @@ const GameDetailsPage = () => {
       <div className="game-details-container">
         {/* Navigation Breadcrumb */}
         <div className="breadcrumb-bar">
-          <Link to="/games" className="breadcrumb-link">← Back to Catalog</Link>
+          <Link to="/games" className="breadcrumb-link">Catalog</Link>
           <span className="breadcrumb-sep">/</span>
           <span className="breadcrumb-current">{game.title}</span>
         </div>
@@ -120,7 +125,12 @@ const GameDetailsPage = () => {
           {/* Info & Purchase/Library Column */}
           <div className="details-info-box">
             <div className="details-meta-row">
-              <span className="details-rating-badge">★ {game.rating?.toFixed(1) || '4.5'} / 5.0</span>
+              <span className="details-rating-badge">
+                <svg className="star-icon" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                {game.rating?.toFixed(1) || '4.5'} Rating
+              </span>
               <span className="details-availability">Verified Cloud Title</span>
             </div>
 
@@ -129,7 +139,7 @@ const GameDetailsPage = () => {
             <div className="details-price-tag">
               <span className="price-curr">₹</span>
               <span className="price-val">{game.price}</span>
-              <span className="price-note">Single license purchase value (Free with Pro membership)</span>
+              <span className="price-note">Single license (Included with Pro membership)</span>
             </div>
 
             <p className="details-desc">{game.description}</p>
@@ -146,16 +156,16 @@ const GameDetailsPage = () => {
               </div>
               <div className="spec-item">
                 <span className="spec-label">Platform:</span>
-                <span className="spec-val">GameHub SaaS Web Client</span>
+                <span className="spec-val">GameHub Web Client</span>
               </div>
             </div>
 
             {/* Action Feedback */}
             {actionSuccess && (
               <div className="alert-box alert-success">
-                ✓ {actionSuccess}
+                {actionSuccess}
                 <div style={{ marginTop: '0.5rem' }}>
-                  <Link to="/library" className="alert-link">Open My Library →</Link>
+                  <Link to="/library" className="alert-link">Open My Library</Link>
                 </div>
               </div>
             )}
@@ -165,7 +175,7 @@ const GameDetailsPage = () => {
                 {actionError}
                 {actionError.includes('upgrade') || actionError.includes('Upgrade') ? (
                   <div style={{ marginTop: '0.5rem' }}>
-                    <Link to="/checkout" className="alert-link">Upgrade to Pro (₹299) →</Link>
+                    <Link to="/checkout" className="alert-link">Upgrade to Pro (₹299)</Link>
                   </div>
                 ) : null}
               </div>
@@ -175,9 +185,9 @@ const GameDetailsPage = () => {
             <div className="details-actions-bar">
               {isInLibrary ? (
                 <div className="in-library-status-box">
-                  <span className="badge-owned-lg">✓ Already in Your Library</span>
+                  <span className="badge-owned-lg">In Your Library</span>
                   <Link to="/library" className="btn-secondary-md">
-                    Open in Library →
+                    Open Library
                   </Link>
                 </div>
               ) : (
@@ -186,7 +196,7 @@ const GameDetailsPage = () => {
                   disabled={adding}
                   className="btn-primary-lg"
                 >
-                  {adding ? 'Adding to Library...' : '+ Add to Personal Library'}
+                  {adding ? 'Adding to Library...' : 'Add to Personal Library'}
                 </button>
               )}
             </div>
@@ -194,9 +204,9 @@ const GameDetailsPage = () => {
             {/* Plan Info Hint */}
             <div className="details-hint-box">
               <p>
-                💡 <strong>Free Plan:</strong> Store up to 3 games in your library.
+                <strong>Free Plan:</strong> Store up to 3 games in your library.
                 <br />
-                ⭐ <strong>Pro Plan:</strong> Unlimited games for just ₹299/mo.
+                <strong>Pro Plan:</strong> Unlimited games for ₹299/mo.
               </p>
             </div>
           </div>

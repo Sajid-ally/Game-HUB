@@ -47,12 +47,16 @@ const DashboardPage = () => {
   return (
     <div className="dashboard-page">
       <div className="dashboard-container">
-        {/* Success Banner (e.g. after demo payment) */}
+        {/* Success Banner */}
         {successBanner && (
           <div className="alert-banner-success">
-            <span className="banner-icon">🎉</span>
+            <span className="banner-icon-svg">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span>
             <div>
-              <strong>Payment Confirmed!</strong> {successBanner}
+              <strong>Payment Confirmed</strong> — {successBanner}
             </div>
             <button
               onClick={() => setSuccessBanner('')}
@@ -66,7 +70,13 @@ const DashboardPage = () => {
         {/* Temporary Play Action Toast */}
         {playAlert && (
           <div className="toast-popup animate-bounce">
-            <span className="toast-icon">🚀</span>
+            <span className="toast-icon-svg">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
+            </span>
             <span>{playAlert}</span>
           </div>
         )}
@@ -74,7 +84,7 @@ const DashboardPage = () => {
         {/* Dashboard Header */}
         <div className="dashboard-header">
           <div>
-            <span className="dashboard-pretitle">SaaS DASHBOARD OVERVIEW</span>
+            <span className="dashboard-pretitle">DASHBOARD OVERVIEW</span>
             <h1 className="dashboard-welcome">
               Welcome, <span className="text-gradient">{user?.name || 'Gamer'}</span>
             </h1>
@@ -85,11 +95,11 @@ const DashboardPage = () => {
 
           <div className="dashboard-header-actions">
             <Link to="/games" className="btn-primary-sm">
-              + Add Games
+              Add Games
             </Link>
             {!isPro && (
               <Link to="/checkout" className="btn-accent-sm">
-                ★ Upgrade to Pro
+                Upgrade to Pro
               </Link>
             )}
           </div>
@@ -105,25 +115,31 @@ const DashboardPage = () => {
               </p>
             </div>
             <Link to="/checkout" className="btn-upgrade-now">
-              Upgrade to Pro (₹299) →
+              Upgrade to Pro (₹299)
             </Link>
           </div>
         ) : (
           <div className="plan-pro-banner">
             <div className="pro-banner-content">
-              <span className="pro-star-badge">★ PRO MEMBER ACTIVE</span>
+              <span className="pro-star-badge">PRO MEMBER ACTIVE</span>
               <h3>Unlimited Cloud Library Unlocked</h3>
               <p>Thank you for being a Pro subscriber. You have zero library restrictions and access to all platform features.</p>
             </div>
           </div>
         )}
 
-        {/* Overview Stat Cards */}
+        {/* Overview Stat Cards with Sleek SVGs */}
         <div className="dashboard-stats-grid">
           <div className="stat-card">
             <div className="stat-card-header">
               <span className="stat-card-title">Total Games</span>
-              <span className="stat-card-icon">🎮</span>
+              <span className="stat-card-svg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="2" y="6" width="20" height="12" rx="4" />
+                  <line x1="6" y1="12" x2="10" y2="12" />
+                  <line x1="8" y1="10" x2="8" y2="14" />
+                </svg>
+              </span>
             </div>
             <div className="stat-card-value">{totalCatalogCount}</div>
             <p className="stat-card-sub">Available in GameHub Catalog</p>
@@ -132,7 +148,12 @@ const DashboardPage = () => {
           <div className="stat-card">
             <div className="stat-card-header">
               <span className="stat-card-title">Library Games</span>
-              <span className="stat-card-icon">📚</span>
+              <span className="stat-card-svg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                </svg>
+              </span>
             </div>
             <div className="stat-card-value">
               {libraryCount}
@@ -146,7 +167,11 @@ const DashboardPage = () => {
           <div className="stat-card">
             <div className="stat-card-header">
               <span className="stat-card-title">Current Plan</span>
-              <span className="stat-card-icon">💎</span>
+              <span className="stat-card-svg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+              </span>
             </div>
             <div className="stat-card-value">
               <span className={`plan-pill ${isPro ? 'pill-pro' : 'pill-free'}`}>
@@ -161,7 +186,11 @@ const DashboardPage = () => {
           <div className="stat-card">
             <div className="stat-card-header">
               <span className="stat-card-title">Account Status</span>
-              <span className="stat-card-icon">🛡️</span>
+              <span className="stat-card-svg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </span>
             </div>
             <div className="stat-card-value text-success">Active</div>
             <p className="stat-card-sub">Verified Cloud Member</p>
@@ -176,7 +205,7 @@ const DashboardPage = () => {
               <p className="section-subtitle-sm">Your latest additions to your private vault</p>
             </div>
             <Link to="/library" className="link-view-all">
-              Go to Full Library ({libraryCount}) →
+              Go to Full Library ({libraryCount})
             </Link>
           </div>
 
@@ -187,11 +216,19 @@ const DashboardPage = () => {
             </div>
           ) : libraryGames.length === 0 ? (
             <div className="empty-state-box">
-              <div className="empty-icon">🎮</div>
+              <div className="empty-svg-wrap">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+                  <rect x="2" y="6" width="20" height="12" rx="4" />
+                  <line x1="6" y1="12" x2="10" y2="12" />
+                  <line x1="8" y1="10" x2="8" y2="14" />
+                  <circle cx="15.5" cy="11.5" r="1" fill="currentColor" />
+                  <circle cx="17.5" cy="13.5" r="1" fill="currentColor" />
+                </svg>
+              </div>
               <h3>Your personal library is empty</h3>
-              <p>You haven't added any games yet. Browse our fictional catalog and claim your first title today.</p>
+              <p>You haven't added any games yet. Browse our catalog and claim your first title today.</p>
               <Link to="/games" className="btn-primary-md">
-                Browse Games Catalog →
+                Browse Games Catalog
               </Link>
             </div>
           ) : (
@@ -218,7 +255,7 @@ const DashboardPage = () => {
                       onClick={() => handlePlayGame(game.title)}
                       className="btn-play-sm"
                     >
-                      ▶ Play
+                      Play
                     </button>
                     <Link to={`/games/${game._id}`} className="btn-details-ghost">
                       Details
