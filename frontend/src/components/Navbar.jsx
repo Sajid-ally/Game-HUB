@@ -17,95 +17,128 @@ const Navbar = () => {
     setMobileMenuOpen(false);
   };
 
+  const isPro = user?.plan === 'pro';
+
   return (
     <header className="navbar-header">
       <div className="navbar-container">
-        {/* Brand Logo */}
+        {/* Brand Logo with Custom Illuminated Icon */}
         <Link to="/" className="navbar-brand" onClick={closeMenu}>
-          <span className="brand-icon">🎮</span>
-          <span className="brand-name">Game<span className="brand-accent">Hub</span></span>
+          <div className="brand-logo-icon">
+            <svg
+              className="logo-svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect x="2" y="6" width="20" height="12" rx="4" />
+              <line x1="6" y1="12" x2="10" y2="12" />
+              <line x1="8" y1="10" x2="8" y2="14" />
+              <circle cx="15.5" cy="11.5" r="1" fill="currentColor" />
+              <circle cx="17.5" cy="13.5" r="1" fill="currentColor" />
+            </svg>
+          </div>
+          <span className="brand-text">
+            GAME<span className="brand-highlight">HUB</span>
+          </span>
         </Link>
-
-        {/* Mobile Hamburger Button */}
-        <button
-          className="mobile-menu-btn"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle Navigation Menu"
-        >
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-        </button>
 
         {/* Navigation Links */}
         <nav className={`navbar-nav ${mobileMenuOpen ? 'nav-open' : ''}`}>
           <div className="nav-links">
             <NavLink
               to="/games"
-              className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+              className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
               onClick={closeMenu}
             >
-              Browse Games
+              <span className="nav-item-icon">🎮</span>
+              <span>Browse Games</span>
             </NavLink>
+
             <NavLink
               to="/pricing"
-              className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+              className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
               onClick={closeMenu}
             >
-              Pricing
+              <span className="nav-item-icon">⚡</span>
+              <span>Pricing</span>
             </NavLink>
 
             {isAuthenticated && (
               <>
                 <NavLink
                   to="/library"
-                  className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+                  className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
                   onClick={closeMenu}
                 >
-                  My Library
+                  <span className="nav-item-icon">📚</span>
+                  <span>My Library</span>
                 </NavLink>
+
                 <NavLink
                   to="/dashboard"
-                  className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+                  className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
                   onClick={closeMenu}
                 >
-                  Dashboard
-                </NavLink>
-                <NavLink
-                  to="/profile"
-                  className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
-                  onClick={closeMenu}
-                >
-                  Profile
+                  <span className="nav-item-icon">📊</span>
+                  <span>Dashboard</span>
                 </NavLink>
               </>
             )}
           </div>
 
-          {/* User Auth Actions */}
+          {/* User Auth Actions / Profile Chip */}
           <div className="nav-auth-actions">
             {isAuthenticated ? (
-              <div className="nav-user-bar">
-                <span className={`plan-badge badge-${user?.plan || 'free'}`}>
-                  {user?.plan === 'pro' ? '★ PRO' : 'FREE'}
-                </span>
-                <span className="nav-username">{user?.name}</span>
-                <button onClick={handleLogout} className="btn-outline-sm">
-                  Logout
+              <div className="nav-profile-group">
+                <Link to="/profile" className="nav-user-chip" onClick={closeMenu}>
+                  <div className={`user-avatar-mini ${isPro ? 'avatar-pro' : ''}`}>
+                    {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                  </div>
+                  <div className="user-chip-meta">
+                    <span className="user-chip-name">{user?.name}</span>
+                    <span className={`plan-pill-mini ${isPro ? 'pill-pro' : 'pill-free'}`}>
+                      {isPro ? '★ PRO' : 'FREE TIER'}
+                    </span>
+                  </div>
+                </Link>
+
+                {!isPro && (
+                  <Link to="/checkout" className="btn-nav-upgrade" onClick={closeMenu}>
+                    Go Pro (₹299)
+                  </Link>
+                )}
+
+                <button onClick={handleLogout} className="btn-nav-logout" title="Sign Out">
+                  Sign Out
                 </button>
               </div>
             ) : (
-              <div className="nav-guest-bar">
-                <Link to="/login" className="btn-ghost" onClick={closeMenu}>
-                  Login
+              <div className="nav-guest-actions">
+                <Link to="/login" className="btn-nav-login" onClick={closeMenu}>
+                  Sign In
                 </Link>
-                <Link to="/register" className="btn-primary-sm" onClick={closeMenu}>
-                  Get Started
+                <Link to="/register" className="btn-nav-join" onClick={closeMenu}>
+                  Get Started Free
                 </Link>
               </div>
             )}
           </div>
         </nav>
+
+        {/* Mobile Hamburger Toggle Button */}
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          <span className={`bar ${mobileMenuOpen ? 'open' : ''}`}></span>
+          <span className={`bar ${mobileMenuOpen ? 'open' : ''}`}></span>
+          <span className={`bar ${mobileMenuOpen ? 'open' : ''}`}></span>
+        </button>
       </div>
     </header>
   );
