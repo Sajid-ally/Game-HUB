@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../services/AuthContext';
+import { useTheme } from '../services/ThemeContext';
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
+  const { theme, toggleTheme, isDark } = useTheme();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -90,8 +92,22 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* User Auth Actions / Profile Chip */}
+          {/* User Auth Actions & Theme Switcher */}
           <div className="nav-auth-actions">
+            {/* Theme Toggle Button (Light/Bright Mode by default) */}
+            <button
+              onClick={toggleTheme}
+              className="theme-toggle-btn"
+              title={isDark ? 'Switch to Bright Mode' : 'Switch to Dark Mode'}
+              aria-label="Toggle Bright/Dark Mode"
+            >
+              {isDark ? (
+                <span className="theme-toggle-content">☀️ Light</span>
+              ) : (
+                <span className="theme-toggle-content">🌙 Dark</span>
+              )}
+            </button>
+
             {isAuthenticated ? (
               <div className="nav-profile-group">
                 <Link to="/profile" className="nav-user-chip" onClick={closeMenu}>
